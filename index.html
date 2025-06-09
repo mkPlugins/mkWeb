@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mkPlugins Official Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+      color: white;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: #111;
+    }
+    nav button {
+      margin-left: 0.5rem;
+      background: none;
+      border: 1px solid #555;
+      color: white;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .plugin-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .plugin-card {
+      background-color: #222;
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+    .plugin-card h3 {
+      margin-top: 0;
+    }
+    .plugin-card button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #444;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>mkPlugins</h1>
+    <nav>
+      <button onclick="switchLang()">EN / FI</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 id="tagline">High-quality Minecraft plugins</h2>
+    <button onclick="alert('Explore Plugins')">Explore Plugins</button>
+  </section>
+
+  <section class="plugin-list" id="pluginList">
+    <!-- Plugins will be injected here -->
+  </section>
+
+  <script>
+    let lang = "en";
+    const texts = {
+      en: {
+        tagline: "High-quality Minecraft plugins",
+        download: "Download",
+      },
+      fi: {
+        tagline: "Laadukkaita Minecraft-pluginteja",
+        download: "Lataa",
+      },
+    };
+
+    const plugins = [
+      {
+        name: "mkBans",
+        description: "A powerful and fully customizable Minecraft- punishment plugin.",
+        version: "1.20+",
+        tested: "1.21.4",
+        link: "#",
+      },
+      {
+        name: "mkAuctionHouse",
+        description: "AuctionHouse in minecraft2.",
+        version: "1.20+",
+        link: "#",
+      },
+    ];
+
+    function renderPlugins() {
+      const list = document.getElementById("pluginList");
+      list.innerHTML = "";
+      plugins.forEach((plugin) => {
+        const card = document.createElement("div");
+        card.className = "plugin-card";
+        card.innerHTML = `
+          <h3>${plugin.name}</h3>
+          <p>${plugin.description}</p>
+          <p><small>Version: ${plugin.version}</small></p>
+          <button onclick="window.location.href='${plugin.link}'">${texts[lang].download}</button>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function switchLang() {
+      lang = lang === "en" ? "fi" : "en";
+      document.getElementById("tagline").textContent = texts[lang].tagline;
+      renderPlugins();
+    }
+
+    renderPlugins();
+  </script>
+</body>
+</html>
